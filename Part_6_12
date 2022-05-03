@@ -1,0 +1,121 @@
+import java.util.Random;
+import java.util.Scanner;
+import java.util.ArrayList;
+ 
+public class Kayttoliittyma {
+ 
+    private Vitsipankki vitsit; 
+    private Scanner lukija;
+ 
+public Kayttoliittyma(Vitsipankki vitsit, Scanner lukija) {
+    this.vitsit = vitsit;
+    this.lukija = lukija;
+    }
+ 
+public void kaynnista() {
+    
+    while (true) {
+        System.out.println("Komennot:");
+        System.out.println(" 1 - lisää vitsi");
+        System.out.println(" 2 - arvo vitsi");
+        System.out.println(" 3 - listaa vitsit");
+        System.out.println(" X - lopeta");
+ 
+        String komento = lukija.nextLine();
+ 
+        if (komento.equals("X")) {
+            break;
+            }
+ 
+        if (komento.equals("1")) {
+ 
+            System.out.println("Kirjoita lisättävä vitsi:");
+            String vitsi = lukija.nextLine();
+            vitsit.lisaaVitsi(vitsi);
+            }
+ 
+        if (komento.equals("2")) {
+ 
+            System.out.println("Arvotaan vitsi.");
+            //vitsit.arvoVitsi();
+            System.out.println(vitsit.arvoVitsi()); 
+            }
+ 
+        if (komento.equals("3")) {
+ 
+            System.out.println("Tulostetaan vitsit.");
+            vitsit.tulostaVitsit();
+            }
+        }
+    }
+}
+
+
+
+***********************
+
+
+
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+ 
+public class Ohjelma {
+ 
+    public static void main(String[] args) {
+ 
+        Vitsipankki pankki = new Vitsipankki();
+        Scanner lukija = new Scanner(System.in);
+        
+        Kayttoliittyma liittyma = new Kayttoliittyma(pankki, lukija);
+        liittyma.kaynnista();
+ 
+    }
+}
+
+
+
+
+
+**************************************
+
+
+
+import java.util.ArrayList;
+import java.util.Random;
+    
+    public class Vitsipankki {
+        private ArrayList<String> vitsit = new ArrayList<>();
+        //private ArrayList<String> vitsit;
+    
+    public void Vitsipankki() {
+        
+        this.vitsit = vitsit;
+    }
+ 
+    public void lisaaVitsi(String vitsi) {
+        this.vitsit.add(vitsi);
+        }
+ 
+    public String arvoVitsi() {
+ 
+        if (vitsit.isEmpty()) {
+            return "Vitsit vähissä.";   
+        } else {
+                Random arpa = new Random();
+                int indeksi = arpa.nextInt(this.vitsit.size());
+                //System.out.println(vitsit.get(indeksi));
+                
+                return (vitsit.get(indeksi));
+            }
+        }
+    public void tulostaVitsit() {
+        for (String joke: vitsit) {
+            System.out.println(joke);
+        }
+        
+    }
+    
+}
+ 
