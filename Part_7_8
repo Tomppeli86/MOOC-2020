@@ -1,0 +1,111 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+ 
+public class Paaohjelma {
+ 
+    public static void main(String[] args) {
+        // HUOM! Älä luo ohjelmassa muita Scanner-olioita. Jos ja toivottavasti
+        // kun teet muita luokkia, anna allaoleva Scanner-olio niille
+        // tarvittaessa parametrina.
+ 
+        Scanner lukija = new Scanner(System.in);
+        ArrayList<String> nimet = new ArrayList<>();
+        ArrayList<String> latinat = new ArrayList<>();
+        ArrayList<String> havainnot = new ArrayList<>();
+ 
+        System.out.println("Lisaa - lisää linnun (huom: komennon nimessä ei ä-kirjainta!)");
+        System.out.println("Havainto - lisää havainnon");
+        System.out.println("Tilasto - tulostaa kaikki linnut");
+        System.out.println("Nayta - tulostaa yhden linnun (huom: komennon nimessä ei ä-kirjainta!)");
+        System.out.println("Lopeta - lopettaa ohjelman");
+ 
+        while (true) {
+ 
+            System.out.print("Syötä komento: ");
+            String komento = lukija.nextLine();
+ 
+            //////////////////////////////////////////////////
+            if (komento.equals("Lopeta")) {
+                break;
+            }
+ 
+            //////////////////////////////////////////////////
+            if (komento.equals("Lisaa")) {
+                System.out.print("Nimi: ");
+                String nimi = lukija.nextLine();
+                nimet.add(nimi);
+                System.out.print("Latinankielinen nimi: ");
+                String latina = lukija.nextLine();
+                latinat.add(latina);
+                System.out.println();
+            }
+ 
+            //////////////////////////////////////////////////
+            if (komento.equals("Havainto")) {
+                int failcounter = 0;
+                System.out.print("Mikä havaittu? ");
+                String havainto = lukija.nextLine();
+                for (String nahty : nimet) {
+                    if (nahty.equals(havainto)) {
+                        havainnot.add(havainto);
+                    } else {
+                        failcounter++;
+                        if (failcounter == nimet.size())
+                            System.err.println("Ei ole lintu!");
+                    }
+                }
+            }
+ 
+            //////////////////////////////////////////////////
+            if (komento.equals("Tilasto")) {
+                int i = 0;
+                int havain = 0;
+                for (String tulostus : nimet) {
+                    System.out.print(tulostus + " (" + latinat.get(i) + "): ");
+ 
+                    for (String maara : havainnot) {
+                        if (tulostus.equals(maara)) {
+                            havain++;
+                        }
+                    }
+                    System.out.print(havain + " havaintoa");
+                    havain = 0;
+ 
+                    i++;
+                    System.out.println();
+                }
+            }
+ 
+            //////////////////////////////////////////////////
+            if (komento.equals("Nayta")) {
+                int maarat = 0;
+                int fail = 0;
+                System.out.println("Mikä? ");
+                String mika = lukija.nextLine();
+ 
+                for (String onko : nimet) {
+                    if (onko.equals(mika)) {
+                        System.out.print(mika + " (" + latinat.get(fail) + "): ");
+                    } else {
+                        fail++;
+                        if (fail == nimet.size()) {
+                            System.out.println("Nimi ei ole listalla");
+                        }
+                    }
+                }
+ 
+                for (String mikas : havainnot) {
+                    if (mikas.equals(mika)) {
+                        maarat++;
+                    }
+                }
+                System.out.println(maarat + " havaintoa");
+            }
+            //////////////////////////////////////////////////
+ 
+        }
+ 
+    }
+ 
+}
+ 
