@@ -1,0 +1,72 @@
+import java.util.Scanner;
+ 
+public class Nestesailiot {
+ 
+    public static void main(String[] args) {
+        Scanner lukija = new Scanner(System.in);
+        int ensimmainen = 0;
+        int toinen = 0;
+        
+ 
+        while (true) { 
+            System.out.println("Ensimmainen: " + ensimmainen + "/100");
+            System.out.println("Toinen: " + toinen + "/100");
+            System.out.print("> ");
+ 
+            String luettu = lukija.nextLine();
+ 
+            if (luettu.equals("lopeta")) {
+                break;
+                }
+ 
+            String[] osat = luettu.split(" ");     
+            String komento = osat[0];
+            int maara = Integer.valueOf(osat[1]);
+            
+            if (komento.equals("lisaa")) {
+                if (maara < 1) {
+                    maara = 0;
+                }
+                ensimmainen = ensimmainen + maara;
+                    if (ensimmainen > 100) {
+                        ensimmainen = 100;
+                        } 
+                    if (ensimmainen < 1) {
+                        ensimmainen = 0;
+                        }
+                }
+                    
+            if (komento.equals("siirra")) {
+                if (maara < 1) {
+                    maara = 0;
+                    }
+                if (ensimmainen == 0) {
+                    maara = 0;
+                }
+                if (maara > ensimmainen) {
+                    maara = ensimmainen;
+                }
+                ensimmainen = ensimmainen - maara;
+                toinen = toinen + maara;
+ 
+                    if (toinen > 100) {
+                        toinen = 100;
+                        }
+                    if (ensimmainen < 1) {
+                        ensimmainen = 0;
+                        }
+                }
+ 
+            if (komento.equals("poista")) {
+                if (maara < 1) {
+                    maara = 0;
+                    }
+                toinen = toinen - maara;
+                if (toinen < 1) {
+                    toinen = 0;
+                    }
+            }   
+ 
+        }
+    }
+}
