@@ -1,0 +1,103 @@
+public class Main {
+ 
+    public static void main(String[] args) {
+        Paivays pvm = new Paivays(13, 2, 2015);
+        System.out.println("Tarkistellun viikon perjantai on " + pvm);
+    
+        Paivays uusiPvm = pvm.paivienPaasta(7);
+        int vk = 1;
+        while (vk <= 7) {
+            System.out.println("Perjantai " + vk + " viikon kuluttua on " + uusiPvm);
+            uusiPvm = uusiPvm.paivienPaasta(7);
+    
+            vk = vk + 1;
+        }
+    
+    
+        System.out.println("Päivämäärä 790:n päivän päästä tarkistellusta perjantaista on ... kokeile itse!");
+        System.out.println("Kokeile " + pvm.paivienPaasta(790));
+    }
+}
+
+
+
+
+**************************************
+
+
+
+
+
+public class Paivays {
+ 
+    private int paiva;
+    private int kuukausi;
+    private int vuosi;
+ 
+    public Paivays(int paiva, int kuukausi, int vuosi) {
+        this.paiva = paiva;
+        this.kuukausi = kuukausi;
+        this.vuosi = vuosi;
+    }
+    public Paivays paivienPaasta(int paivia) {
+       
+        Paivays uusiPaivays = new Paivays(this.paiva, this.kuukausi, this.vuosi);
+        uusiPaivays.etene(paivia);
+        return uusiPaivays;
+  
+    }
+ 
+    @Override
+    public String toString() {
+        return this.paiva + "." + this.kuukausi + "." + this.vuosi;
+    }
+ 
+    public boolean aiemmin(Paivays verrattava) {
+        if (this.vuosi < verrattava.vuosi) {
+            return true;
+        }
+ 
+        if (this.vuosi == verrattava.vuosi && this.kuukausi < verrattava.kuukausi) {
+            return true;
+        }
+ 
+        if (this.vuosi == verrattava.vuosi && this.kuukausi == verrattava.kuukausi &&
+                 this.paiva < verrattava.paiva) {
+            return true;
+        }
+ 
+        return false;
+    }
+ 
+    public void etene() {
+ 
+        if (this.paiva < 30) {
+            this.paiva = this.paiva + 1;
+        } else {
+            if (this.kuukausi < 12) {
+               this.kuukausi = this.kuukausi + 1;
+               this.paiva = 1;
+            } else {
+                this.vuosi = this.vuosi + 1;
+                this.kuukausi = 1;
+                this.paiva = 1;
+            }
+        }     
+    }
+    public void etene(int montakoPaivaa) {
+ 
+        if (this.paiva + montakoPaivaa < 30) {
+            this.paiva = this.paiva + montakoPaivaa;
+        } else {
+            if (this.kuukausi < 12) {
+               this.kuukausi = this.kuukausi + 1;
+               this.paiva = (this.paiva + montakoPaivaa) - 30;
+            } else {
+                this.vuosi = this.vuosi + 1;
+                this.kuukausi = 1;
+                this.paiva = (this.paiva + montakoPaivaa) - 30;
+            }
+        }     
+    }
+ 
+}
