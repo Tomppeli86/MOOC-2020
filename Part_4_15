@@ -1,0 +1,85 @@
+
+
+public class Lukutilasto {
+    
+    private int lukujenMaara;
+    private int summa;
+ 
+ 
+    public Lukutilasto() {
+        this.lukujenMaara = 0;
+        this.summa = 0;
+     }
+ 
+     public void lisaaLuku(int luku) {
+         lukujenMaara++;
+         summa = summa + luku;
+     }
+ 
+    public void parilliset(int luku) {
+        summa = summa + luku;
+    }
+    public void parittomat(int luku) {
+        summa = summa + luku;
+    }
+    public int haeLukujenMaara() {
+        return lukujenMaara;
+    }
+    public int summa() {
+        return summa;
+    }
+    public double keskiarvo() {
+        if (lukujenMaara == 0) {
+            return summa;
+        } else {
+            double keskiarvo = (double)summa / lukujenMaara;
+            return keskiarvo;
+        }
+    }
+    
+}
+
+
+
+********************************
+
+
+import java.util.Scanner;
+ 
+public class Paaohjelma {
+    public static void main(String[] args) {
+        
+        Scanner lukija = new Scanner(System.in);
+        
+        Lukutilasto lisaa = new Lukutilasto();
+        Lukutilasto summa = new Lukutilasto();
+        Lukutilasto pariton = new Lukutilasto();
+    
+        
+        System.out.println("Anna lukuja:");
+ 
+        while (true) {
+ 
+            int luku = Integer.valueOf(lukija.next());
+            
+            if (luku == -1) {
+                break;
+            }
+            
+            lisaa.lisaaLuku(luku);
+            if (luku % 2 == 0) {
+            summa.lisaaLuku(luku);
+            } else {
+            pariton.lisaaLuku(luku);
+            }
+        
+        }
+        System.out.println("Määrä: " + lisaa.haeLukujenMaara());
+        System.out.println("Summa: " + lisaa.summa());
+        System.out.println("Keskiarvo: " + lisaa.keskiarvo());
+        System.out.println("Parillisten summa: " + summa.summa());
+        System.out.println("Parittomien summa: " + pariton.summa());
+ 
+ 
+    }
+}
